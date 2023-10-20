@@ -7,16 +7,15 @@ import { __, sprintf } from '@wordpress/i18n';
  * Internal dependencies
  */
 import './style.scss';
+import useAICheckout from '../../../../blocks/ai-assistant/hooks/use-ai-checkout';
 import useAIFeature from '../../../../blocks/ai-assistant/hooks/use-ai-feature';
 import UsageBar from '../usage-bar';
 
 export default function UsagePanel() {
+	const { checkoutUrl, autosaveAndRedirect, isRedirecting } = useAICheckout();
+
 	// fetch usage data
 	const { hasFeature } = useAIFeature();
-
-	const handleUpgradeClick = () => {
-		alert( 'Work in progress' );
-	};
 
 	return (
 		<div className="jetpack-ai-usage-panel-control">
@@ -40,7 +39,9 @@ export default function UsagePanel() {
 				<Button
 					variant="primary"
 					label="Upgrade your Jetpack AI plan"
-					onClick={ handleUpgradeClick }
+					href={ checkoutUrl }
+					onClick={ autosaveAndRedirect }
+					disabled={ isRedirecting }
 				>
 					Upgrade
 				</Button>

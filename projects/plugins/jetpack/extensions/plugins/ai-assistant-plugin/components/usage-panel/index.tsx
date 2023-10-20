@@ -1,14 +1,23 @@
 /**
  * External dependencies
  */
+import { Button } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
 import './style.scss';
+import useAIFeature from '../../../../blocks/ai-assistant/hooks/use-ai-feature';
 import UsageBar from '../usage-bar';
 
 export default function UsagePanel() {
+	// fetch usage data
+	const { hasFeature } = useAIFeature();
+
+	const handleUpgradeClick = () => {
+		alert( 'Work in progress' );
+	};
+
 	return (
 		<div className="jetpack-ai-usage-panel-control">
 			<p>
@@ -26,6 +35,16 @@ export default function UsagePanel() {
 					sprintf( __( 'Requests will reset in %1$d days.', 'jetpack' ), 10 )
 				}
 			</p>
+
+			{ ! hasFeature && (
+				<Button
+					variant="primary"
+					label="Upgrade your Jetpack AI plan"
+					onClick={ handleUpgradeClick }
+				>
+					Upgrade
+				</Button>
+			) }
 		</div>
 	);
 }

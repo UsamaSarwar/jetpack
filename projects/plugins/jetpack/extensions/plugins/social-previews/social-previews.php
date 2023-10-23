@@ -9,8 +9,6 @@
 
 namespace Automattic\Jetpack\Extensions\Social_Previews;
 
-const FEATURE_NAME = 'social-previews';
-
 // Populate the available extensions with Social Previews.
 add_filter(
 	'jetpack_set_available_extensions',
